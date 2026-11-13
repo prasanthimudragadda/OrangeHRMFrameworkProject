@@ -22,4 +22,8 @@ public class LoginPage extends BasePage{
     public String getErrorMessage(){
         return getText(errorMessage);
     }
+
+    public boolean isLoginButtonDisplayed(){
+        return getText(loginButton).equals("Login");
+    }
 }

@@ -10,13 +10,13 @@ import org.testng.annotations.Parameters;
 public class BaseTest {
 
     @Parameters("browser")
-    @BeforeMethod
+    @BeforeMethod(alwaysRun = true)
     public void setUp(@Optional("chrome") String browser){
         DriverFactory.initDriver(browser);
         DriverFactory.getDriver().get(ConfigReader.get("baseUrl"));
     }
 
-    @AfterMethod
+    @AfterMethod(alwaysRun = true)
     public void tearDown(){
         DriverFactory.quitDriver();
     }

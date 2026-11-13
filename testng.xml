@@ -7,12 +7,14 @@
         <parameter name="browser" value="chrome"/>
         <classes>
             <class name="tests.LoginTest"/>
+            <class name = "tests.LogoutTest"/>
         </classes>
     </test>
 <!--    <test name = "firefox">-->
 <!--        <parameter name="browser" value="firefox"/>-->
 <!--        <classes>-->
 <!--            <class name="tests.LoginTest"/>-->
+<!--    <class name = "tests.LogoutTest"/>-->
 <!--        </classes>-->
 
 <!--    </test>-->
