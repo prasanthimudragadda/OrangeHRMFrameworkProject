@@ -14,7 +14,7 @@ import java.io.IOException;
 
 public class LoginTest extends BaseTest {
 
-    @Test
+    @Test(retryAnalyzer = listeners.RetryAnalyzer.class)
     public void validLoginTest(){
 
     LoginPage lp = new LoginPage(DriverFactory.getDriver());
@@ -29,7 +29,7 @@ public Object[][] getInvalidData() throws IOException {
         return ExcelUtil.getData("src/test/resources/testdata/LoginData.xlsx", "InvalidLogin");
 }
 
-    @Test(dataProvider = "invalidData")
+    @Test(dataProvider = "invalidData", retryAnalyzer = listeners.RetryAnalyzer.class)
     public void invalidLoginTest(String username, String password) {
         LoginPage lp = new LoginPage(DriverFactory.getDriver());
         lp.login(username, password);
