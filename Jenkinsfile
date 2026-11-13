@@ -3,7 +3,7 @@ pipeline{
         stages{
           stage('Run Tests'){
                 steps{
-                  sh 'mvn clean test -Dheadless=true'
+                  sh '/opt/homebrew/bin/mvn clean test -Dheadless=true'
                       }
                     }
                 }
