@@ -6,6 +6,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
+import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -15,17 +16,30 @@ public class DriverFactory {
     private static final ThreadLocal<WebDriver> driver = new ThreadLocal<>();
     public static void initDriver(String browser){
         boolean remote = Boolean.parseBoolean(ConfigReader.get("remote"));
+        boolean headless = Boolean.parseBoolean(ConfigReader.get("headless"));
         if(remote){
             driver.set(createRemoteDriver(browser));
         }
         else if (browser.equalsIgnoreCase("chrome")){
-            driver.set(new ChromeDriver());
+            ChromeOptions options = new ChromeOptions();
+            if(headless){
+                options.addArguments("--headless", "--window-size=1920,1080");
+            }
+            driver.set(new ChromeDriver(options));
         }
         else if (browser.equalsIgnoreCase("firefox")){
-            driver.set(new FirefoxDriver());
+            FirefoxOptions options = new FirefoxOptions();
+            if(headless){
+                options.addArguments("--headless");
+            }
+            driver.set(new FirefoxDriver(options));
         }
         else if(browser.equalsIgnoreCase("edge")){
-            driver.set(new EdgeDriver());
+            EdgeOptions options = new EdgeOptions();
+            if(headless){
+                options.addArguments("--headless");
+            }
+            driver.set(new EdgeDriver(options));
         }
         else{
             throw new RuntimeException("Browser not supported: "+browser);
